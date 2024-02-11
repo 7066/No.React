@@ -1,0 +1,44 @@
+{
+  "id": "4422679",
+  "name": "No.Vue/Element-Plus",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "785013",
+      "name": "菜单",
+      "font_class": "menu",
+      "unicode": "e648",
+      "unicode_decimal": 58952
+    },
+    {
+      "icon_id": "21730726",
+      "name": "github",
+      "font_class": "github",
+      "unicode": "e657",
+      "unicode_decimal": 58967
+    },
+    {
+      "icon_id": "37226613",
+      "name": "关机",
+      "font_class": "guanji",
+      "unicode": "e63d",
+      "unicode_decimal": 58941
+    },
+    {
+      "icon_id": "2310974",
+      "name": "游戏手柄",
+      "font_class": "youxishoubing",
+      "unicode": "e644",
+      "unicode_decimal": 58948
+    },
+    {
+      "icon_id": "22779598",
+      "name": "翻译",
+      "font_class": "translate",
+      "unicode": "e65c",
+      "unicode_decimal": 58972
+    }
+  ]
+}
