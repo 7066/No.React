@@ -119,6 +119,13 @@
     "useLoginStore": true,
     "Router": true,
     "RouteGuard": true,
-    "useExample1Store": true
+    "useExample1Store": true,
+    "INIT_THEME": true,
+    "getThemes": true,
+    "useTheme": true,
+    "ANTD_THEME": true,
+    "THEME": true,
+    "useThemeList": true,
+    "getThemeList": true
   }
 }

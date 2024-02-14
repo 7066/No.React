@@ -8,15 +8,30 @@ export const initWhitelist = () => {
       if (key === "global") return true;
       if (key === "login") return true;
       if (key === "lost") return true;
-      if (key === "home") return true;
       return false;
     })
     .flatMap((url: string) => modules(url).default);
 };
 
 /** @加载用户路由 */
-export const load = (mode) => {
-  console.log("cao");
+export const load = () => {
+  let { mode, ins, menu, metas } = useGlobalStore();
+  // 重置按钮权限
+  ins.clear();
+
+  // 重置metas信息
+  Object.keys(metas).forEach((key) => {
+    delete metas[key];
+  });
+
+  // 重置菜单
+  menu.length = 0;
+
+  // 重置加载方式
+  const MODE = localStorage.getItem("MODE");
+  if (MODE) {
+    mode = MODE as "code" | "url";
+  }
 
   const API = new Map([
     [
@@ -26,7 +41,66 @@ export const load = (mode) => {
       "code",
       () =>
         request.get("/api/user/menu1").then((resp: any) => {
-          console.log(resp, "router?", router);
+          // 收集按钮权限
+          Object.keys(resp).forEach((key) => {
+            ins.set(key, new Set(resp[key]));
+          });
+          // 获取路由表第一个
+          const routes = (router.routes.at(0) as { children: Array<any> })
+            .children;
+          // 获取各模块路由表
+          const modules = require.context("../modules", true, /route\.tsx$/);
+
+          // 收集 meta
+          const dm = (arr: any, parent: any) => {
+            arr.forEach((rt: any) => {
+              if (rt.children) {
+                dm(rt.children, rt);
+              } else {
+                let key = rt.path;
+                if (!rt.path) {
+                  key = parent.path + "/";
+                }
+                metas[key] = rt.meta;
+              }
+            });
+          };
+
+          // 遍历动态添加路由
+          modules.keys().forEach((url: string) => {
+            const key = url.replace(/\.|\/|route|tsx/g, "");
+            if (key in resp) {
+              modules(url).default.forEach((rt: any) => {
+                metas[rt.path] = rt.meta;
+                if (rt.children) {
+                  dm(rt.children, rt);
+                }
+                routes.unshift(rt);
+              });
+            }
+          });
+
+          /** @根据前端自定义目录和实际权限确定最终展示 */
+          const dp = (arr: Array<any>): any => {
+            return arr.filter((item: any) => {
+              if (item.type === "menu") {
+                item.children = dp(item.children);
+                return item.children.length;
+              } else {
+                if ("/" + item.code in metas) {
+                  item = Object.assign(item, metas["/" + item.code]);
+                  return true;
+                }
+                return false;
+              }
+            });
+          };
+
+          // 设置菜单
+          dp(M1MENU).forEach((el: any) => {
+            menu.push(el);
+          });
+
           return resp;
         }),
     ],
@@ -46,7 +120,7 @@ const M1MENU = [
     children: [
       {
         type: "menu",
-        label: "自定义目录2, 无权限的模块不加载",
+        label: "无权限的模块不加载",
         children: [
           {
             type: "module",
@@ -69,7 +143,7 @@ const M1MENU = [
     label: "自定义目录9",
     children: [
       {
-        code: "example1",
+        code: "example4",
       },
     ],
   },

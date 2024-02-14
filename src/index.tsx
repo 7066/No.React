@@ -7,10 +7,21 @@ import "assets/style"; // 基础样式
 const el = document.getElementById("root") as Element;
 const root = createRoot(el);
 
+function ANTDConfig(props: any) {
+  const [theme] = useTheme();
+  return (
+    <ConfigProvider key={theme} theme={ANTD_THEME()}>
+      {props.children}
+    </ConfigProvider>
+  );
+}
+
 root.render(
-  <React.StrictMode>
+  //   <React.StrictMode>
+  <ANTDConfig>
     <Suspense fallback={<div>loading...</div>}>
       <RouterProvider router={router} />
     </Suspense>
-  </React.StrictMode>
+  </ANTDConfig>
+  //   </React.StrictMode>
 );

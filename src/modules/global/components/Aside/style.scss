@@ -1,0 +1,13 @@
+.global-wrap {
+  .aside-wrap.ignore {
+    width: 260px;
+    height: 100%;
+    display: flex;
+    box-shadow: var(--border-box-shadow) 6px 0px 10px;
+    box-sizing: border-box;
+    .el-menu {
+      width: 100%;
+      border-right: none;
+    }
+  }
+}

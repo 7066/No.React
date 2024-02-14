@@ -1,5 +1,5 @@
 import React from "react";
-import "./index.scss";
+import "./style.scss";
 export default function Login() {
   const navigate = useNavigate();
   const onClick = (item: string) => {
