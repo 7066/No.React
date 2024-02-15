@@ -1,19 +1,18 @@
 import { useSnapshot, proxy, subscribe } from "valtio";
-/** @主题变量 */
+// ANTD 主题动态数据, 需与项目 CSS Var 保持一致
+import ANTD from "./ANTD.json";
 const THEME = proxy({
-  target: "" /**   */ /** 当前主题 */,
-  list: new Set() /**   */ /** 当前系统支持的主题列表, 由接口获取, 文件可放置在 public/_themes, 采用异步加载 */,
-  loaded: new Set() /** */ /** 缓存当前页面已加载过的主题, 防止重复加载 */,
+  target: "" /**         */ /** 当前主题 */,
+  list: new Set() /**    */ /** 当前系统支持的主题列表, 由接口获取, 文件可放置在 public/_themes, 采用异步加载 */,
+  loaded: new Set() /**  */ /** 缓存当前页面已加载过的主题, 防止重复加载 */,
 });
-// 操作常量
-let _code = 0; /**   */ /** 仅用于处理文件内逻辑判断 改变的来源 0 用户操作, 1 初始化, -1 监听函数 */
+let _code = 0; /**       */ /** 仅用于处理文件内逻辑判断 改变的来源 0 用户操作, 1 初始化, -1 监听函数 */
 
 /** @watch 监听变化 加载主题文件 */
 subscribe(THEME, ([[, [key]]]) => {
-  // 主题变化
   if (key === "target") {
     if (THEME.list.has(THEME.target)) {
-      LOAD(THEME.target);
+      LOAD_THEME(THEME.target);
     } else message.warning("该主题暂未实现");
   }
 });
@@ -29,14 +28,18 @@ export const useTheme = (): [string, (v: string) => void] => {
   ];
 };
 
-/** @hooks 获取主题列表, 只读 */
+/** @hooks 获取主题列表, 可选 */
 export const useThemeList = () => {
   const { list } = useSnapshot(THEME);
   return [list, (v: any) => {}];
 };
 
-/** @hooks 初始化 设置变量, 添加监听, 加载文件 */
-export const INIT_THEME = () => {
+/** @ANTD主题 */
+export const ANTD_THEME = () =>
+  THEME.target ? (ANTD as any)[THEME.target] : {};
+
+/** @初始化 设置变量, 添加监听, 加载文件 */
+(() => {
   console.info("初始化主题");
   // 获取当前系统是否是暗色主题
   const _dark = window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -66,36 +69,12 @@ export const INIT_THEME = () => {
         THEME.target = local;
       }
     });
-};
+})();
 
-const JSON: any = {
-  light: {},
-  dark: {
-    token: {
-      // 主题色
-      colorPrimary: "#9064ff",
-      // 背景色
-      colorBgBase: "#141414",
-      // 文字
-      colorTextBase: "#fff",
-    },
-    components: {
-      Menu: {
-        itemSelectedBg: "#29252b",
-      },
-    },
-  },
-  crazy: {
-    colorPrimary: "rgb(255, 0, 0)",
-  },
-};
-/** @ANTD主题 */
-export const ANTD_THEME = () => (THEME.target ? JSON[THEME.target] : {});
-
-/** @异步加载文件 */
-function LOAD(_: string) {
+/** @加载文件 */
+function LOAD_THEME(_: string) {
   /** @如果文件已加载 更新主题样式 */
-  if (THEME.loaded.has(_)) return UPDATE(_);
+  if (THEME.loaded.has(_)) return UPDATE_THEME(_);
 
   /** @如果文件未加载 */
 
@@ -108,11 +87,11 @@ function LOAD(_: string) {
   // 标记该主题已加载
   THEME.loaded.add(_);
   // 更新主题样式
-  UPDATE(_);
+  UPDATE_THEME(_);
 }
 
-/** @更新主题样式 */
-function UPDATE(_: any) {
+/** @更新主题设置监听 */
+function UPDATE_THEME(_: any) {
   document.documentElement.className = _;
 
   // 获取当前系统是否是暗色主题
@@ -126,14 +105,14 @@ function UPDATE(_: any) {
     // A-1: 初始化时, local 就是 auto, 表示与系统一致 - 监听系统主题变化
     // A-2: 初始化时, local 不是 auto, 恰好与系统一致 - 不监听系统主题变化
     if (_code === 1 && local === "auto") {
-      _system.addEventListener("change", onChange);
+      _system.addEventListener("change", LISTEN_THEME);
     }
     // B: 本地持久化的主题与当前系统主题一致 在改变时有两种情况
     // B-1: 监听触发, 不改变本地持久化的主题, 且无需重复设置监听
     // B-2: 用户触发, 设置本地持久化的主题与系统一致, 且设置监听
     if (_code === 0) {
       localStorage.setItem("THEME", "auto");
-      _system.addEventListener("change", onChange);
+      _system.addEventListener("change", LISTEN_THEME);
     }
   } else {
     // C: 本地持久化的主题与当前系统主题不一致
@@ -141,7 +120,7 @@ function UPDATE(_: any) {
     // C-2: 当触发时, 本地持久化为跟随系统时, 需要移除监听事件
     localStorage.setItem("THEME", _);
     if (local === "auto") {
-      _system.removeEventListener("change", onChange);
+      _system.removeEventListener("change", LISTEN_THEME);
     }
   }
   // 重置触发标记为用户触发
@@ -149,7 +128,7 @@ function UPDATE(_: any) {
 }
 
 /** @系统主题监听 */
-function onChange(event: any) {
+function LISTEN_THEME(event: any) {
   // 标记监听触发
   _code = -1;
   if (event.matches) {

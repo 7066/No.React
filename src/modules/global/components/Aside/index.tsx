@@ -22,6 +22,7 @@ export default function Aside() {
   const { menu } = useGlobalStore();
   const navigate = useNavigate();
   const location = useLocation();
+  const { t } = useTranslation();
   const [key, setKey] = useState("");
   useEffect(() => {
     const _key = location.pathname.replace("/", "");
@@ -42,7 +43,7 @@ export default function Aside() {
   const _getItem = (arr: any) =>
     arr.map((item: any) => {
       return getItem(
-        item.label || item.code,
+        item.label || t(item.code + ".code"),
         item.code || _random(),
         item.icons || "",
         item.children ? _getItem(item.children) : ""

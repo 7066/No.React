@@ -1,6 +1,5 @@
 import React from "react";
 import "./index.scss";
-import { load } from "utils/router";
 import Header from "../components/Header";
 import Aside from "../components/Aside";
 import Tags from "../components/Tags";
@@ -21,7 +20,7 @@ export default function Global() {
       console.log(" 删除部分 localStorage");
     } else {
       if (!ins.size) {
-        load().then(() => {
+        LOAD_ROUTES().then(() => {
           // TODO 重定向会404闪烁
           const path = localStorage.getItem("PATH") || "";
           navigate(path === "/login" ? "/" : path, {

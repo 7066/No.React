@@ -5,6 +5,7 @@ export default function Tags() {
   const { metas } = useGlobalStore();
   const [tags, setTags] = useState({});
   const [key, setKey] = useState("");
+  const { t } = useTranslation();
 
   const updateTags = (TAGS: any) => {
     localStorage.setItem("TAGS", JSON.stringify(TAGS));
@@ -52,7 +53,7 @@ export default function Tags() {
             onClose={(e) => onClose(e, _key)}
             onClick={() => onClick((tags as any)[_key])}
           >
-            {(tags as any)[_key].code}
+            {t((tags as any)[_key].code + ".code")}
           </Tag>
         );
       })}

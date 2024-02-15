@@ -2,12 +2,9 @@ import React from "react";
 import { MenuProps } from "antd";
 import "./style.scss";
 export default function Locale() {
-  // const locale = useLocale();
+  const [, setLocale] = useLocale();
   const onClick = (key: "zh" | "en") => {
-    console.log(key, "key?");
-    // if (key !== locale.value) {
-    //   locale.value = key;
-    // }
+    setLocale(key);
   };
 
   const items: MenuProps["items"] = [

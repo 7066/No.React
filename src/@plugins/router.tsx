@@ -1,5 +1,10 @@
-/** @加载白名单 */
-export const initWhitelist = () => {
+import React from "react";
+import Global from "@/global/views/index";
+import { Navigate } from "react-router-dom";
+import { createHashRouter } from "react-router-dom";
+
+/** @初始化白名单路由 */
+const initWhitelist = () => {
   const modules = require.context("../modules", true, /route\.tsx$/);
   return modules
     .keys()
@@ -12,9 +17,14 @@ export const initWhitelist = () => {
     })
     .flatMap((url: string) => modules(url).default);
 };
+const children = initWhitelist();
+children.unshift({
+  path: "/",
+  element: <Navigate to="/home" />,
+});
 
 /** @加载用户路由 */
-export const load = () => {
+export const LOAD_ROUTES = () => {
   let { mode, ins, menu, metas } = useGlobalStore();
   // 重置按钮权限
   ins.clear();
@@ -148,3 +158,16 @@ const M1MENU = [
     ],
   },
 ];
+
+// 生成路由
+export default createHashRouter([
+  {
+    path: "/",
+    element: <Global />,
+    children,
+  },
+  {
+    path: "*",
+    element: <Navigate to="/404" />,
+  },
+]);

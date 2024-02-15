@@ -141,7 +141,7 @@ module.exports = (env) => {
           },
         ],
         dirs: [
-          "src/hooks" /**                */ /** 个性化支持 */,
+          "src/hooks" /**      */ /** 个性化支持 */,
           "src/modules/**/store.ts" /**  */ /** 模块Store */,
         ],
         dts: "@types/auto-imports.d.ts",
