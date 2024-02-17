@@ -27,7 +27,6 @@ export default function Aside() {
   const [key, setKey] = useState("");
   const [keyPath, setKeyPath] = useState([]);
   useEffect(() => {
-    console.log(menu, "menu?");
     const data = JSON.parse(localStorage.getItem("MENU") || "{}");
     const code = location.pathname.split("/").pop() || "";
     if (code in data) {

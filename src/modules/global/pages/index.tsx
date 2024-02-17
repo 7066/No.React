@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import "./style.scss";
 import Header from "../components/Header";
 import Aside from "../components/Aside";
@@ -8,7 +8,7 @@ export default function Global() {
   const location = useLocation();
   const navigate = useNavigate();
   const [{ ins }, _global] = useGlobalStore();
-
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     // 保存上次路由地址
     if (location.pathname !== "/404" && location.pathname !== "/") {
@@ -30,14 +30,17 @@ export default function Global() {
           } else {
             FN = dynamicLoad;
           }
+          setLoading(true);
           FN().then((resp) => {
             _global.ins = resp.ins;
             _global.menu = resp.menu;
-            // TODO 重定向会404闪烁
             const path = localStorage.getItem("PATH") || "";
             navigate(path === "/login" ? "/" : path, {
               replace: true,
             });
+            setTimeout(() => {
+              setLoading(false);
+            }, 500);
           });
         }
       } else {
@@ -62,7 +65,17 @@ export default function Global() {
 
   return (
     <div className={["global-wrap", single ? "single" : "container"].join(" ")}>
-      {single ? (
+      {loading ? (
+        <Spin
+          style={{
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        />
+      ) : single ? (
         <Outlet></Outlet>
       ) : (
         <>

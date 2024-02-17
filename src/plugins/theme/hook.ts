@@ -40,7 +40,6 @@ export const ANTD_THEME = () =>
 
 /** @初始化 设置变量, 添加监听, 加载文件 */
 (() => {
-  console.info("初始化主题");
   // 获取当前系统是否是暗色主题
   const _dark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   // 接口请求

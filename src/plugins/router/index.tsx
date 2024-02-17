@@ -24,7 +24,19 @@ const router = createHashRouter([
 
 export default function Router() {
   return (
-    <Suspense fallback={<div>loading...</div>}>
+    <Suspense
+      fallback={
+        <Spin
+          style={{
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        />
+      }
+    >
       <RouterProvider router={router} />
     </Suspense>
   );

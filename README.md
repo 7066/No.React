@@ -29,18 +29,28 @@ yarn p
     ├─iconfont 图标库的存放位置
     └─themes   主题变量文件的存放位置, 文件命名要保持风格一致, 与 Ant Design 无关, 已实现懒加载
 ├─src
-    ├─assets   资源, 已配置路径别名 `assets`, 可放置全局图片和样式
-    ├─constant 常量, 已配置路径别名 `constant`, 可放置全局图片和样式
+    ├─assets         资源, 已配置路径别名 `assets`, 可放置全局图片和样式
+    ├─components     组件, 公共组件
+    ├─constant       常量, 已配置路径别名 `constant`, 可放置全局图片和样式
     │    antd-components.js  组件名称数据, 已实现 Ant Design 动态导入组件
     │    antd-icons.js       图标名称数据, 已实现 @ant-design/icons 动态导入图标
     │    antd-theme.js       主题变量数据, 已实现 Ant Design 动态更改主题
     │    menu.json           前端菜单数据, 当 加载路由 采用前端匹配时使用
     │    ...
-    ├─hooks    方法, 已配置自动导入, 可放置项目常用的函数
+    ├─hooks          方法, 已配置自动导入, 可放置项目常用的函数
+    │    plugins.ts       导出 plugins 文件内集成好的方法
+    │    isAllowed.ts     模块按钮鉴权
     │    ...
-    ├─modules  模块, 已配置路径别名 `@`
+    ├─modules        模块, 已配置路径别名 `@`
     │    ...
-    ├─utils    工具, 已配置路径别名 `utils`
+    ├─plugins        插件, 处理后的插件
+    │    ...
+    │    router  路由组件集成
+    │    theme   主题换肤功能组件集成
+    │    locale  国际化 i18next 处理
+    │    request 请求 axios 二次封装
+    │    ...
+    ├─utils          工具, 已配置路径别名 `utils`
 
 ```
 
@@ -51,13 +61,14 @@ yarn p
 ```text
 ├─hooks
     │   request         封装 Axios 后的实例, 建议在模块下的 service.ts 中使用
-    │   useTranslation  仅导出插件 react-i18next 内置的函数
     │   useLocale       获取当前语言, 通过方法可切换语言, 语言文件已实现懒加载
+    │   useTranslation  仅导出插件 react-i18next 内置的函数
     │   getRoutes       获取路由表, 用来获取当前路由 meta 或者 动态添加路由, 已实现 `前端路由匹配` 和 `后端路由懒加载`
-    │   isAllowed       获取当前模块的按钮权限
     │   useTheme        获取当前主题, 可更改; 支持懒加载主题, 动态改变 Ant Design 主题
     │   useThemeList    获取主题列表
-    │   ANTD_THEME      获取定义好的 Ant Design 主题变量
+    │   staticMatch     前端静态匹配加载路由
+    │   dynamicLoad     后端动态加载路由
+    │   isAllowed       获取当前模块的按钮权限
 ```
 
 ##### Modules
@@ -87,7 +98,7 @@ yarn p
 
 ##### route
 
-> 模块路由
+> 模块内的路由信息表, 用于前端静态匹配时使用
 
 ```javascript
 export default [
