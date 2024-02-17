@@ -11,8 +11,9 @@
     "paths": {
       "@/*": ["./src/modules/*"],
       "#/*": ["./src/components/*"],
+      "utils/*": ["./src/utils/*"],
       "assets/*": ["./src/assets/*"],
-      "utils/*": ["./src/utils/*"]
+      "constant/*": ["./src/constant/*"]
     },
     "types": ["node", "webpack-env"],
     "esModuleInterop": true,

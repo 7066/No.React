@@ -10,7 +10,7 @@ export default function () {
     setTheme(checked ? "light" : "dark");
   };
   return (
-    <div className="theme-wrap ignore">
+    <div className="theme-component ignore">
       <Switch
         checked={value}
         checkedChildren={<Light />}

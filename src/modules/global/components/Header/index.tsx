@@ -14,7 +14,7 @@ export default function Header() {
   };
 
   return (
-    <div className="header-wrap ignore">
+    <div className="header-component ignore">
       <div className="logo"></div>
       <div className="tools">
         <Theme />

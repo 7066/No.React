@@ -19,7 +19,7 @@ export default function Locale() {
   ];
 
   return (
-    <div className="locales-wrap ignore">
+    <div className="locales-component ignore">
       <Dropdown menu={{ items }} placement="bottom">
         <Space>
           <div>

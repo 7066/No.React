@@ -5,8 +5,9 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 // 不会重复创建标签页
 const openBrowser = require("react-dev-utils/openBrowser");
-// ant design 组件名称集合
-const antds = require("./antd");
+// ant design
+const antd_icons = require("../src/constant/antd-icons.js");
+const antd_components = require("../src/constant/antd-components.js");
 module.exports = (env) => {
   return {
     devServer: {
@@ -35,6 +36,7 @@ module.exports = (env) => {
       static: [
         {
           directory: path.join(__dirname, "../public"),
+          publicPath: "/public",
         },
       ],
     },
@@ -125,6 +127,7 @@ module.exports = (env) => {
       alias: {
         "#": path.resolve(__dirname, "../src/components"),
         "@": path.resolve(__dirname, "../src/modules"),
+        constant: path.resolve(__dirname, "../src/constant"),
         assets: path.resolve(__dirname, "../src/assets"),
         utils: path.resolve(__dirname, "../src/utils"),
       },
@@ -137,7 +140,8 @@ module.exports = (env) => {
           "react",
           "react-router-dom",
           {
-            antd: antds,
+            antd: antd_components,
+            "@ant-design/icons": antd_icons,
           },
         ],
         dirs: [

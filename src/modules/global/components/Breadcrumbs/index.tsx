@@ -1,50 +1,46 @@
 import React from "react";
-import { useMatches } from "react-router-dom";
-
 export default function Breadcrumbs() {
   const location = useLocation();
-  const match = useMatches();
-  const { metas } = useGlobalStore();
   const [items, setItems] = useState([]);
+  const routes = getRoutes();
+  const { t } = useTranslation();
   useEffect(() => {
-    // 获取符合条件的路由, 去掉 "/" [首位]路由
-    // 把匹配到的路由切片 @A ["", "example2", "", "blue", "", "2"]
-    const _MATCH = match
-      .filter((v: any, i: number) => i)
-      .map((item) => item.pathname.split("/"));
+    const matchs = location.pathname.split("/").filter((key) => key);
+    const result: any = [];
+    const dp = (target: any, matchs: any, result: any, flat = 0) => {
+      const key = matchs.at(flat);
 
-    // 遍历 metas 过滤符合条件的
-    const _items: any = Object.keys(metas)
-      .filter((item: any) => {
-        // 把 key 切片, 符合 @A
-        const T = item.split("/");
-        // 过滤匹配,  _MATCH 是多项, 过滤出 多个符合条件的
-        return _MATCH.some((m) => {
-          // 匹配长度
-          if (m.length === T.length) {
-            // 精细匹配
-            return m.every((k, i) => {
-              // 动态路径参数 查到: 直接跳过
-              if (T[i].includes(":")) {
-                return true;
-              }
-              return T[i] === k;
-            });
-          }
-          return false;
-        });
-      })
-      .map((key) => metas[key]);
-    setItems(_items);
+      if (key) {
+        const _result: any = target
+          .filter((r: any) => {
+            const path = r.path.split("/").filter((k: any) => k);
+            if (path.includes(":")) {
+              return true;
+            }
+            return path.at(flat) === key;
+          })
+          .at(0);
+        if (_result) {
+          result.push(_result);
+        }
+        dp(_result?.children || [], matchs, result, flat + 1);
+      } else {
+        if (flat === matchs.length && target.length) {
+          const _result = target.filter((r: any) => r.path === "").at(0);
+          result.push(_result);
+        }
+      }
+    };
+    dp(routes, matchs, result);
+    setItems(result);
   }, [location.pathname]);
 
   return (
-    // title: <a href="">Application Center</a>,
     <Breadcrumb
-      className="breadcrumb-wrap"
+      className="breadcrumb-component"
       items={items.map((v: any) => {
         return {
-          title: v.code || v.label,
+          title: v?.meta.code ? t(v.meta.code + ".code") : v.meta.label,
         };
       })}
     />

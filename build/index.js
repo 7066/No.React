@@ -2,6 +2,7 @@ const { merge } = require("webpack-merge");
 const config = require("./webpack.config");
 const development = require("./webpack.dev");
 const production = require("./webpack.prod");
+
 module.exports = (env) => {
   switch (true) {
     case env.development:

@@ -49,7 +49,7 @@ Mock.mock("/api/user/menu1", "get", () => {
  * 一方面方便判断, 另一方面可能有多种目录 如外部链接, 内部内嵌链接等
  *
  * @ps
- * 因为后端路由时要要统计 views 下所有 .vue 文件, 所以建议 views 下只放页面文件, 相关的零散组件 放在 moduleName/compoinents 下
+ * 因为后端路由时要要统计 pages 下所有 .vue 文件, 所以建议 pages 下只放页面文件, 相关的零散组件 放在 moduleName/compoinents 下
  * 通过 @/moduleName/components 引用
  *
  * @path
@@ -58,36 +58,29 @@ Mock.mock("/api/user/menu1", "get", () => {
 // 后端路由返回数据
 const M2JSON = [
   {
-    label: "加载不出来的目录",
-    type: "menu",
-    children: [
-      {
-        // 比如开发人员动态添加了路由, 但是文件代码 并没有合并主分支
-        // 其他开发人员不受影响
-        type: "module",
-        meta: {
-          icon: "menu",
-          code: "home2",
-          operate: ["edit", "export"],
-        },
-        path: "/home2",
-        component: "home2/views/index",
-      },
-    ],
+    type: "module",
+    meta: {
+      icon: "CrownFilled",
+      code: "home",
+      operate: ["edit", "export"],
+    },
+    path: "/home",
+    component: "home/pages/index",
   },
   {
+    type: "menu",
+    icon: "LayoutFilled",
     label: "没有相关文件的路由不会加载",
-    type: "menu",
     children: [
       {
         type: "module",
         meta: {
-          icon: "menu",
           code: "home",
+          icon: "MergeFilled",
           operate: ["edit", "export"],
         },
         path: "/home",
-        component: "home/views/index",
+        component: "home/pages/index",
       },
       {
         // 比如开发人员动态添加了路由, 但是文件代码 并没有合并主分支
@@ -99,57 +92,42 @@ const M2JSON = [
           operate: ["edit", "export"],
         },
         path: "/home2",
-        component: "home2/views/index",
-      },
-    ],
-  },
-  {
-    label: "自定义目录A",
-    type: "menu",
-    children: [
-      {
-        type: "module",
-        meta: {
-          icon: "menu",
-          code: "home",
-          operate: ["edit", "export"],
-        },
-        path: "/home",
-        component: "home/views/index",
+        component: "home2/pages/index",
       },
     ],
   },
   {
     type: "module",
     meta: {
-      icon: "menu",
       code: "example1",
+      icon: "CodeSandboxCircleFilled",
       operate: ["export"],
     },
     path: "/example1",
-    component: "example1/views/index",
+    component: "example1/pages/index",
   },
   {
     label: "自定义目录B",
     type: "menu",
+    icon: "WindowsFilled",
     children: [
       {
         type: "module",
         meta: {
-          icon: "menu",
           code: "example2",
+          icon: "FundFilled",
           operate: ["edit"],
         },
         path: "/example2",
-        component: "example2/views/index",
+        component: "example2/pages/index",
         children: [
           {
             type: "module",
             meta: {
               label: "红桃",
             },
-            path: "/",
-            component: "example2/views/red",
+            path: "",
+            component: "example2/pages/red",
           },
           {
             type: "module",
@@ -157,15 +135,15 @@ const M2JSON = [
               label: "金桃",
             },
             path: "/example2/gold",
-            component: "example2/views/gold",
+            component: "example2/pages/gold",
           },
           {
             type: "module",
             meta: {
               label: "蓝桃",
             },
-            path: "/example2/blue",
-            component: "example2/views/blue",
+            path: "/example2/blue/:id",
+            component: "example2/pages/blue",
           },
         ],
       },

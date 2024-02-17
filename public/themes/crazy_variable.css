@@ -1,5 +1,7 @@
 :root.crazy {
   /* 项目变量 */
   --border-box-shadow: rgba(255, 0, 0, 0.15);
-  --tag-background-color: rgb(43, 165, 192);
+  --tag-background-color: #c8331f;
+  --bg-color: #fff;
+  --text-color-primary: #000;
 }

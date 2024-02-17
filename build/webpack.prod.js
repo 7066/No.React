@@ -11,13 +11,14 @@ module.exports = {
   mode: "production",
   output: {
     filename: "static/js/[name].[contenthash].js",
+    publicPath: "./",
   },
   plugins: [
     new CopyWebpackPlugin({
       patterns: [
         {
           from: path.resolve(__dirname, "../public"),
-          to: path.resolve(__dirname, "../dist"),
+          to: path.resolve(__dirname, "../dist/public"),
         },
       ],
     }),
@@ -41,22 +42,22 @@ module.exports = {
       }),
     ],
     // 切片
-    splitChunks: {
-      minSize: 10000,
-      cacheGroups: {
-        react: {
-          chunks: "all",
-          test: /[\\/]node_modules[\\/].*react(.*)/,
-          priority: 80,
-          name: "react",
-        },
-        // lodash: {
-        //   chunks: "all",
-        //   test: /[\\/]node_modules[\\/].*lodash(.*)/,
-        //   priority: 80,
-        //   name: "lodash",
-        // },
-      },
-    },
+    // splitChunks: {
+    //   minSize: 10000,
+    //   cacheGroups: {
+    //     // react: {
+    //     //   chunks: "all",
+    //     //   test: /[\\/]node_modules[\\/].*react(.*)/,
+    //     //   priority: 80,
+    //     //   name: "react",
+    //     // },
+    //     // lodash: {
+    //     //   chunks: "all",
+    //     //   test: /[\\/]node_modules[\\/].*lodash(.*)/,
+    //     //   priority: 80,
+    //     //   name: "lodash",
+    //     // },
+    //   },
+    // },
   },
 };

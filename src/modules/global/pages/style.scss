@@ -1,0 +1,39 @@
+.global-wrap {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+  &.container {
+    display: flex;
+    flex-direction: column;
+    .content-wrap {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      overflow: hidden;
+      flex-direction: row;
+      .main {
+        width: 100%;
+        height: 100%;
+        padding: 24px;
+        overflow: hidden;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        .module-wrap {
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+          padding: 12px;
+          box-sizing: border-box;
+          border-radius: 6px;
+          box-shadow: var(--border-box-shadow) 0px 0px 24px;
+          & > div {
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+    }
+  }
+}

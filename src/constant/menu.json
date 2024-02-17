@@ -1,0 +1,43 @@
+[
+  {
+    "type": "module",
+    "code": "home"
+  },
+  {
+    "type": "menu",
+    "label": "自定义目录1",
+    "icon": "ProductFilled",
+    "children": [
+      {
+        "type": "menu",
+        "label": "无权限的模块不加载",
+        "icon": "ProductFilled",
+        "children": [
+          {
+            "type": "module",
+            "code": "example1"
+          },
+          {
+            "type": "module",
+            "code": "XXX"
+          }
+        ]
+      },
+      {
+        "type": "module",
+        "code": "example2"
+      }
+    ]
+  },
+  {
+    "type": "menu",
+    "label": "自定义目录9",
+    "icon": "ProductFilled",
+    "children": [
+      {
+        "type": "module",
+        "code": "example2"
+      }
+    ]
+  }
+]

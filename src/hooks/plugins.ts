@@ -1,8 +1,9 @@
 // axios 相关
-export { request } from "../@plugins/request";
+export { request } from "../plugins/request";
 // i18n 相关
-export { default as i18n, useTranslation, useLocale } from "../@plugins/i18n";
+export { useTranslation, useLocale } from "../plugins/locale";
 // 路由 相关
-export { default as router, LOAD_ROUTES } from "../@plugins/router";
+export { getRoutes } from "../plugins/router";
+export { staticMatch, dynamicLoad } from "../plugins/router/hook";
 // 主题 相关
-export { useThemeList, useTheme, ANTD_THEME } from "../@plugins/theme";
+export { useThemeList, useTheme, ANTD_THEME } from "../plugins/theme/hook";
