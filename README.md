@@ -30,7 +30,7 @@ yarn p
     └─themes   主题变量文件的存放位置, 文件命名要保持风格一致, 与 Ant Design 无关, 已实现懒加载
 ├─src
     ├─assets         资源, 已配置路径别名 `assets`, 可放置全局图片和样式
-    ├─components     组件, 公共组件
+    ├─components     组件, 已配置路径别名 `#`,
     ├─constant       常量, 已配置路径别名 `constant`, 可放置全局图片和样式
     │    antd-components.js  组件名称数据, 已实现 Ant Design 动态导入组件
     │    antd-icons.js       图标名称数据, 已实现 @ant-design/icons 动态导入图标

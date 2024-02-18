@@ -56,7 +56,7 @@ export default function Global() {
 
   const [single, setSingle] = useState(false);
   useEffect(() => {
-    if (location.pathname === "/login" || location.pathname === "/404") {
+    if (location.pathname === "/login") {
       if (!single) setSingle(true);
     } else {
       if (single) setSingle(false);

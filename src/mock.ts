@@ -30,6 +30,7 @@ const M1JSON: M1 = {
   home: ["edit", "export"],
   example1: ["edit"],
   example2: ["export"],
+  system: ["export"],
 };
 Mock.mock("/api/user/menu1", "get", () => {
   return {

@@ -125,8 +125,8 @@ module.exports = (env) => {
     resolve: {
       extensions: [".tsx", ".ts", ".jsx", ".js", ".css", ".scss"],
       alias: {
-        "#": path.resolve(__dirname, "../src/components"),
         "@": path.resolve(__dirname, "../src/modules"),
+        "#": path.resolve(__dirname, "../src/components"),
         constant: path.resolve(__dirname, "../src/constant"),
         assets: path.resolve(__dirname, "../src/assets"),
         utils: path.resolve(__dirname, "../src/utils"),

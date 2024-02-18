@@ -1,0 +1,10 @@
+export default [
+  {
+    meta: {
+      code: "{{lowerCase code}}",
+      icon: "ProductFilled",
+    },
+    path: "/{{lowerCase code}}",
+    Component: lazy(() => import("@/{{lowerCase code}}/pages")),
+  },
+];

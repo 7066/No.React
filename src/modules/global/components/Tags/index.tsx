@@ -14,23 +14,25 @@ export default function Tags() {
 
   useEffect(() => {
     const TAGS = JSON.parse(localStorage.getItem("TAGS") || "{}");
-    const path = location.pathname;
-    const key = "/" + path.split("/").at(1);
-    if (key !== "/") {
-      const route: any = routes.filter((r) => r.path === key).at(0);
+    const url = location.pathname;
+    const code = url.split("/").at(1);
+    let config = {};
+    if (code && code !== "404") {
+      const path = "/" + code;
+      const route: any = routes.filter((r) => r.path === path).at(0);
       if (route) {
-        setKey(key);
-        setTags(() => {
-          const _tags = {
-            ...TAGS,
-            ...tags,
-            [key]: Object.assign({}, route?.meta || {}, { path }),
-          };
-          updateTags(_tags);
-          return _tags;
-        });
+        setKey(path);
+        config = {
+          [path]: Object.assign({}, route?.meta || {}, { url }),
+        };
       }
     }
+
+    setTags(() => {
+      const data = Object.assign({}, TAGS, tags, config);
+      updateTags(data);
+      return data;
+    });
   }, [location.pathname]);
 
   const onClose = (e: any, key: string) => {
@@ -41,14 +43,14 @@ export default function Tags() {
     setTags(T);
   };
   const navigate = useNavigate();
-  const onClick = (path: string) => {
-    if (path) navigate(path);
+  const onClick = (url: string) => {
+    if (url) navigate(url);
   };
 
   return (
     <Space className="tags-component" size={[0, 8]} wrap>
       {Object.keys(tags).map((_key) => {
-        const { code = "", path = "", icon = "" } = (tags as any)[_key];
+        const { code = "", url = "", icon = "" } = (tags as any)[_key];
         const _icon =
           icon in ANTDIcons
             ? React.createElement((ANTDIcons as any)[icon])
@@ -60,7 +62,7 @@ export default function Tags() {
             closable
             color={key === _key ? "var(--tag-background-color)" : "default"}
             onClose={(e) => onClose(e, _key)}
-            onClick={() => onClick(path)}
+            onClick={() => onClick(url)}
           >
             {t(code + ".code")}
           </Tag>
