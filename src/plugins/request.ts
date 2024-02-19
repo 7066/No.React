@@ -14,7 +14,7 @@ instance.interceptors.request.use(
       content: "请求错误!",
     });
     return Promise.reject(error);
-  }
+  },
 );
 
 // 添加响应拦截器
@@ -37,7 +37,7 @@ instance.interceptors.response.use(
       content: "服务器错误!",
     });
     return Promise.reject(error);
-  }
+  },
 );
 
 export const request = instance;

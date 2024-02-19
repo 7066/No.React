@@ -40,7 +40,7 @@ const LOAD_LOCALE = (key: string) => {
         return modules(url).then((resources: any) => {
           return [lng, ns, resources];
         });
-      })
+      }),
     ).then((resp: any) => {
       const result = resp.reduce(
         (result: any, props: any) => {
@@ -55,7 +55,7 @@ const LOAD_LOCALE = (key: string) => {
         {
           lng: "",
           translation: {},
-        }
+        },
       );
 
       i18n.addResourceBundle(result.lng, "translation", result.translation);

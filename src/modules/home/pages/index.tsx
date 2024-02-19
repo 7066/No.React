@@ -1,6 +1,5 @@
 import React from "react";
 import "./style.scss";
-
 export default function Home() {
   const [{ mode }, _global] = useGlobalStore();
   const [{ count: count1 }, _example1] = useExample1Store();

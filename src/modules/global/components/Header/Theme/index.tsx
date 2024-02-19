@@ -2,8 +2,8 @@ import React from "react";
 import Light from "./light";
 import Dark from "./dark";
 import "./style.scss";
-export default function () {
-  let [theme, setTheme] = useTheme();
+export default function Theme() {
+  const [theme, setTheme] = useTheme();
   const [value] = useState(theme !== "dark");
 
   const onChange = (checked: any) => {

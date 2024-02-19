@@ -1,6 +1,6 @@
 import { useSnapshot, proxy, subscribe } from "valtio";
 // ANTD 主题动态数据, 需与项目 CSS Var 保持一致
-const ANTD = require("constant/antd-theme");
+import * as ANTD from "constant/antd-theme.js";
 const THEME = proxy({
   target: "" /**         */ /** 当前主题 */,
   list: new Set() /**    */ /** 当前系统支持的主题列表, 由接口获取, 文件可放置在 public/_themes, 采用异步加载 */,
@@ -31,7 +31,7 @@ export const useTheme = (): [string, (v: string) => void] => {
 /** @hooks 获取主题列表, 可选 */
 export const useThemeList = () => {
   const { list } = useSnapshot(THEME);
-  return [list, (v: any) => {}];
+  return [list, () => {}];
 };
 
 /** @ANTD主题 */

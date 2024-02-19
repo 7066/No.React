@@ -126,3 +126,5 @@ export default [
 ## 代码规范
 
 `husky` `commitlint` `lint-staged` `ESLint` `Prettier` `stylelint`
+
+TODO `icon图标优化` `husky` `commitlint` `lint-staged` `stylelint` `开发环境优化`

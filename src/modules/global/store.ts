@@ -7,7 +7,7 @@ const Store: T = proxy({
 });
 
 export const useGlobalStore = (sync?: boolean): [Readonly<T>, T] => [
-  useSnapshot(Store),
+  useSnapshot(Store, { sync }),
   Store,
 ];
 

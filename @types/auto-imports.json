@@ -1,6 +1,5 @@
 {
   "globals": {
-    "ANTD_THEME": true,
     "AccountBookFilled": true,
     "AccountBookOutlined": true,
     "AccountBookTwoTone": true,
@@ -959,7 +958,6 @@
     "useTheme": true,
     "useThemeList": true,
     "useTransition": true,
-    "useTranslation": true,
-    "useSystemStore": true
+    "useTranslation": true
   }
 }
