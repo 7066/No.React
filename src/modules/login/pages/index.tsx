@@ -2,8 +2,10 @@ import React from "react";
 import "./style.scss";
 export default function Login() {
   useEffect(() => {
+    NProgress.start();
     // 清除Token
     localStorage.removeItem("TOKEN");
+    NProgress.done();
   }, []);
   const navigate = useNavigate();
   const onClick = (item: string) => {

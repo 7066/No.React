@@ -14,7 +14,7 @@ module.exports = {
   mode: "production",
   output: {
     filename: "static/js/[name].[contenthash].js",
-    publicPath: "./",
+    publicPath: "/",
   },
   plugins: [
     new CopyWebpackPlugin({

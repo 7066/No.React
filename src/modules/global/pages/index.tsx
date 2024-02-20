@@ -11,16 +11,15 @@ export default function Global() {
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     // 保存上次路由地址
-    NProgress.start();
     if (location.pathname !== "/404" && location.pathname !== "/") {
       sessionStorage.setItem("PATH", location.pathname);
-      NProgress.done();
     }
 
     if (location.pathname !== "/login") {
       const TOKEN = localStorage.getItem("TOKEN");
       if (TOKEN) {
         if (!ins.size) {
+          NProgress.start();
           const MODE = localStorage.getItem("MODE");
           if (MODE) {
             _global.mode = MODE as "code" | "url";
