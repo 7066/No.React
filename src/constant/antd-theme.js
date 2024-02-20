@@ -11,6 +11,9 @@ module.exports = {
       Menu: {
         itemSelectedBg: "#29252b",
       },
+      Button: {
+        primaryShadow: "0 2px 0 #000000",
+      },
     },
   },
   crazy: {

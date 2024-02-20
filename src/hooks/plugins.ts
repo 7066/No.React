@@ -8,3 +8,6 @@ export { getRoutes } from "../plugins/router";
 export { staticMatch, dynamicLoad } from "../plugins/router/hook";
 // 主题 相关
 export { useThemeList, useTheme } from "../plugins/theme/hook";
+// 进度条
+export { default as NProgress } from "nprogress";
+import "nprogress/nprogress.css";

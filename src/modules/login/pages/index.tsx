@@ -2,14 +2,8 @@ import React from "react";
 import "./style.scss";
 export default function Login() {
   useEffect(() => {
-    // 缓存手动刷新前的路由地址
-    localStorage.removeItem("PATH");
-    // 缓存Token
+    // 清除Token
     localStorage.removeItem("TOKEN");
-    // 缓存页签
-    localStorage.removeItem("TAGS");
-    // 缓存菜单默认选中项
-    localStorage.removeItem("MENU");
   }, []);
   const navigate = useNavigate();
   const onClick = (item: string) => {

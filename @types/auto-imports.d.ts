@@ -561,6 +561,7 @@ declare global {
   const MoreOutlined: typeof import('@ant-design/icons')['MoreOutlined']
   const MutedFilled: typeof import('@ant-design/icons')['MutedFilled']
   const MutedOutlined: typeof import('@ant-design/icons')['MutedOutlined']
+  const NProgress: typeof import('../src/hooks/plugins')['NProgress']
   const NavLink: typeof import('react-router-dom')['NavLink']
   const Navigate: typeof import('react-router-dom')['Navigate']
   const NodeCollapseOutlined: typeof import('@ant-design/icons')['NodeCollapseOutlined']

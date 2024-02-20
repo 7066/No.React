@@ -27,7 +27,7 @@ export default function Aside() {
   const [key, setKey] = useState("");
   const [keyPath, setKeyPath] = useState([]);
   useEffect(() => {
-    const data = JSON.parse(localStorage.getItem("MENU") || "{}");
+    const data = JSON.parse(sessionStorage.getItem("MENU") || "{}");
     const code = location.pathname.split("/").pop() || "";
     if (code in data) {
       const config = data[code];
@@ -40,14 +40,14 @@ export default function Aside() {
     if (item.key) {
       const code = item.key.split("_").at(0);
       if (code) {
-        const config = JSON.parse(localStorage.getItem("MENU") || "{}");
+        const config = JSON.parse(sessionStorage.getItem("MENU") || "{}");
         Object.assign(config, {
           [code]: {
             key: item.key,
             keyPath: item.keyPath,
           },
         });
-        localStorage.setItem("MENU", JSON.stringify(config));
+        sessionStorage.setItem("MENU", JSON.stringify(config));
         navigate("/" + code);
       }
     }

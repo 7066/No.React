@@ -8,12 +8,12 @@ export default function Tags() {
   const { t } = useTranslation();
   const routes = getRoutes();
 
-  const updateTags = (TAGS: any) => {
-    localStorage.setItem("TAGS", JSON.stringify(TAGS));
+  const updateTags = (data: any) => {
+    sessionStorage.setItem("TAGS", JSON.stringify(data));
   };
 
   useEffect(() => {
-    const TAGS = JSON.parse(localStorage.getItem("TAGS") || "{}");
+    const TAGS = JSON.parse(sessionStorage.getItem("TAGS") || "{}");
     const url = location.pathname;
     const code = url.split("/").at(1);
     let config = {};

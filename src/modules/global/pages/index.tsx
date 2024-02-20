@@ -11,8 +11,10 @@ export default function Global() {
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     // 保存上次路由地址
+    NProgress.start();
     if (location.pathname !== "/404" && location.pathname !== "/") {
-      localStorage.setItem("PATH", location.pathname);
+      sessionStorage.setItem("PATH", location.pathname);
+      NProgress.done();
     }
 
     if (location.pathname !== "/login") {
@@ -34,12 +36,13 @@ export default function Global() {
           FN().then((resp) => {
             _global.ins = resp.ins;
             _global.menu = resp.menu;
-            const path = localStorage.getItem("PATH") || "";
+            const path = sessionStorage.getItem("PATH") || "";
             navigate(path === "/login" ? "/" : path, {
               replace: true,
             });
             setTimeout(() => {
               setLoading(false);
+              NProgress.done();
             }, 500);
           });
         }

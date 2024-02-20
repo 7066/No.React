@@ -15,6 +15,7 @@
     "axios": "^1.6.7",
     "i18next": "^23.8.2",
     "mockjs": "^1.1.0",
+    "nprogress": "^0.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-i18next": "^14.0.5",
@@ -28,6 +29,7 @@
     "@babel/preset-react": "^7.23.3",
     "@babel/preset-typescript": "^7.23.3",
     "@types/mockjs": "^1.0.10",
+    "@types/nprogress": "^0.2.3",
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.19",
     "@types/webpack-env": "^1.18.4",
@@ -59,7 +61,6 @@
     "sass-loader": "^14.1.0",
     "style-loader": "^3.3.4",
     "stylelint": "^16.2.1",
-    "stylelint-config-prettier": "^9.0.5",
     "stylelint-config-prettier-scss": "^1.0.0",
     "stylelint-config-standard-scss": "^13.0.0",
     "terser-webpack-plugin": "^5.3.10",
@@ -69,5 +70,6 @@
     "webpack-bundle-analyzer": "^4.10.1",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1"
-  }
+  },
+  "git": "2.15.0"
 }

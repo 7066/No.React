@@ -958,6 +958,7 @@
     "useTheme": true,
     "useThemeList": true,
     "useTransition": true,
-    "useTranslation": true
+    "useTranslation": true,
+    "NProgress": true
   }
 }
