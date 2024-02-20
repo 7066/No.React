@@ -1,6 +1,6 @@
 ## 简介
 
-> 基于 `Webpack` 搭建的 `React` `TypeScript` `Ant Design` `Valtio` 项目
+> 基于 `Webpack` 搭建的 `React` `TypeScript` `Ant Design` `Valtio` PC项目
 
 `node: 18.19.0` `webpack: ^5.90.1` `react: ^18.2.0` `valtio: ^1.13.1` `antd: ^5.14.0`
 
@@ -126,5 +126,3 @@ export default [
 ## 代码规范
 
 `husky` `commitlint` `lint-staged` `ESLint` `Prettier` `stylelint`
-
-TODO `icon图标优化` `开发环境优化`
