@@ -6,7 +6,7 @@
     width: 1em;
     height: 1em;
     vertical-align: -0.15em;
-    fill: currentColor;
+    fill: currentcolor;
     overflow: hidden;
   }
 }
@@ -21,6 +21,7 @@
 ::before {
   font-family: inherit;
 }
+
 // 其他样式重置
 html,
 body,

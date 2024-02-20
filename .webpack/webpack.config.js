@@ -9,8 +9,6 @@ const openBrowser = require("react-dev-utils/openBrowser");
 const antd_icons = require("../src/constant/antd-icons.js");
 const antd_components = require("../src/constant/antd-components.js");
 
-import husky from "husky";
-console.log(husky());
 module.exports = (env) => {
   return {
     devServer: {
