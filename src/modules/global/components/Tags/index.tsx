@@ -1,8 +1,12 @@
 import React from "react";
 import "./style.scss";
 import * as ANTDIcons from "@ant-design/icons";
+import { useMatches } from "react-router-dom";
 export default function Tags() {
   const location = useLocation();
+  const matches = useMatches();
+  const navigate = useNavigate();
+
   const [tags, setTags] = useState({});
   const [key, setKey] = useState("");
   const { t } = useTranslation();
@@ -20,6 +24,7 @@ export default function Tags() {
     if (code && code !== "404") {
       const path = "/" + code;
       const route: any = routes.filter((r) => r.path === path).at(0);
+
       if (route) {
         setKey(path);
         config = {
@@ -37,12 +42,31 @@ export default function Tags() {
 
   const onClose = (e: any, key: string) => {
     e.preventDefault();
+    const keys = Object.keys(tags);
+    const item = matches.at(1) as any;
     const T = Object.assign({}, tags) as any;
-    delete T[key];
-    updateTags(T);
-    setTags(T);
+
+    if (key in tags) {
+      if (keys.length > 1) {
+        // 表示删除的是当前路由
+        if (item.pathname === key) {
+          // 删除
+          delete T[key];
+          // 获取当前剩余第一个页签
+          const _t: any = Object.keys(tags).at(0);
+          // 获取路由地址
+          const path = T[_t].path;
+          // 跳转路由
+          navigate(path);
+        } else {
+          // 删除
+          delete T[key];
+        }
+      }
+      updateTags(T);
+      setTags(T);
+    }
   };
-  const navigate = useNavigate();
   const onClick = (url: string) => {
     if (url) navigate(url);
   };

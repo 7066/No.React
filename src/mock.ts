@@ -108,6 +108,16 @@ const M2JSON = [
     component: "example1/pages/index",
   },
   {
+    type: "module",
+    meta: {
+      code: "example1",
+      icon: "CodeSandboxCircleFilled",
+      operate: ["export"],
+    },
+    path: "/example1",
+    component: "example1/pages/index",
+  },
+  {
     label: "自定义目录B",
     type: "menu",
     icon: "WindowsFilled",

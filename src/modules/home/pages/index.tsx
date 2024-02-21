@@ -10,7 +10,7 @@ export default function Home() {
     setTheme("crazy");
   };
 
-  const onMode = (mode: "code" | "url") => {
+  const onMode = (mode: "staticMatch" | "dynamicLoad") => {
     _global.mode = mode;
     localStorage.setItem("MODE", mode);
     window.location.reload();
@@ -72,14 +72,14 @@ export default function Home() {
             <div>
               <Flex gap="middle">
                 <Button
-                  type={mode === "code" ? "primary" : "default"}
-                  onClick={() => onMode("code")}
+                  type={mode === "staticMatch" ? "primary" : "default"}
+                  onClick={() => onMode("staticMatch")}
                 >
                   前端路由
                 </Button>
                 <Button
-                  type={mode === "url" ? "primary" : "default"}
-                  onClick={() => onMode("url")}
+                  type={mode === "dynamicLoad" ? "primary" : "default"}
+                  onClick={() => onMode("dynamicLoad")}
                 >
                   后端路由
                 </Button>

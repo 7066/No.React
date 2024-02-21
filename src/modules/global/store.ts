@@ -3,7 +3,7 @@ import { proxy, useSnapshot } from "valtio";
 const Store: T = proxy({
   ins: new Map(),
   menu: [],
-  mode: "url",
+  mode: "dynamicLoad",
 });
 
 export const useGlobalStore = (sync?: boolean): [Readonly<T>, T] => [
@@ -14,5 +14,5 @@ export const useGlobalStore = (sync?: boolean): [Readonly<T>, T] => [
 interface T {
   ins: Map<string, Set<string>>;
   menu: any;
-  mode: "url" | "code";
+  mode: "dynamicLoad" | "staticMatch";
 }

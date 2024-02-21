@@ -40,27 +40,27 @@ module.exports = {
       {
         type: "add",
         path: "src/modules/{{lowerCase code}}/pages/index.tsx",
-        templateFile: "build/plop/templates/module/pages/index.hbs",
+        templateFile: "./.plop/templates/module/pages/index.hbs",
       },
       {
         type: "add",
         path: "src/modules/{{lowerCase code}}/pages/style.scss",
-        templateFile: "build/plop/templates/module/pages/style.hbs",
+        templateFile: "./.plop/templates/module/pages/style.hbs",
       },
       {
         type: "add",
         path: "src/modules/{{lowerCase code}}/route.ts",
-        templateFile: "build/plop/templates/module/route.hbs",
+        templateFile: "./.plop/templates/module/route.hbs",
       },
       {
         type: "add",
         path: "src/modules/{{lowerCase code}}/service.ts",
-        templateFile: "build/plop/templates/module/service.hbs",
+        templateFile: "./.plop/templates/module/service.hbs",
       },
       {
         type: "add",
         path: "src/modules/{{lowerCase code}}/store.ts",
-        templateFile: "build/plop/templates/module/store.hbs",
+        templateFile: "./.plop/templates/module/store.hbs",
       },
     ];
     if (data.hasLocales) {
@@ -68,12 +68,12 @@ module.exports = {
         {
           type: "add",
           path: "src/modules/{{lowerCase code}}/locales/zh.json",
-          templateFile: "build/plop/templates/module/locales/zh.hbs",
+          templateFile: "./.plop/templates/module/locales/zh.hbs",
         },
         {
           type: "add",
           path: "src/modules/{{lowerCase code}}/locales/en.json",
-          templateFile: "build/plop/templates/module/locales/en.hbs",
+          templateFile: "./.plop/templates/module/locales/en.hbs",
         },
       ]);
     }

@@ -55,7 +55,6 @@ export default function Example2() {
             <h2 className="title">路由切换</h2>
             <h6>切换Tag时, 会保留当前路由地址</h6>
             <div>
-              {/* <NavLink to="/example2/gold">金</NavLink> */}
               <Button type="link" block onClick={() => onClick("")}>
                 红
               </Button>
@@ -75,6 +74,21 @@ export default function Example2() {
               </Button>
             </div>
             <Outlet></Outlet>
+          </div>
+        </Col>
+
+        <Col span={12}>
+          <div className="block">
+            <h2 className="title">404页面</h2>
+            <div>
+              <Button
+                type="link"
+                block
+                onClick={() => onClick("/example2/gold404")}
+              >
+                Go 404
+              </Button>
+            </div>
           </div>
         </Col>
       </Row>

@@ -17,6 +17,8 @@ export const initWhitelist = () => {
 /** @前端路由 静态匹配 - 前端定义菜单目录 后端返回模块权限及其按钮权限 */
 export const staticMatch = () =>
   request.get("/api/user/menu1").then((resp: any) => {
+    // 防止重复加载
+    const ISREADY = new Set();
     // 路由 id
     let id = 0;
     // 按钮权限
@@ -40,7 +42,7 @@ export const staticMatch = () =>
         // 给子路由添加 id
         if (justId) {
           Object.assign(item, {
-            id: `${++id}`,
+            id: id++ + "",
             children: dp(item.children || [], true),
           });
           return true;
@@ -61,6 +63,7 @@ export const staticMatch = () =>
               ins.set(item.code, new Set(resp[item.code]));
               // 获取模块对应的文件路径
               const url = keys[item.code];
+
               // 读取模块的路由配置信息
               modules(url).default.forEach((route: any) => {
                 // 补充菜单中的 meta
@@ -68,14 +71,19 @@ export const staticMatch = () =>
                   meta: route.meta,
                 });
 
-                // 设置路由信息
-                const config = Object.assign(route, {
-                  id: `${++id}`,
-                  children: dp(route.children || [], true),
-                });
-                // 添加路由
-                routes.unshift(config);
+                // 防止重复加载
+                if (!ISREADY.has(url)) {
+                  // 设置路由信息
+                  const config = Object.assign(route, {
+                    id: id++ + "",
+                    children: dp(route.children || [], true),
+                  });
+                  // 添加路由
+                  routes.unshift(config);
+                }
               });
+              // 标记已加载
+              ISREADY.add(item.code);
               return true;
             }
           }
@@ -91,6 +99,8 @@ export const staticMatch = () =>
 /** @前端路由 动态加载 - 前端定义菜单目录 后端返回模块权限及其按钮权限 */
 export const dynamicLoad = () =>
   request.get("/api/user/menu2").then((resp: any) => {
+    // 防止重复加载
+    const ISREADY = new Set();
     // 路由 id
     let id = 0;
     // 按钮权限
@@ -109,7 +119,7 @@ export const dynamicLoad = () =>
       }, {});
 
     // 递归遍历后端菜单
-    const dp = (arr: any, addRoute = true) => {
+    const dp = (arr: any, SET = true) => {
       return arr.filter((item: any) => {
         // 菜单继续遍历, 根据 children 长度决定是否显示
         if (item.type === "menu") {
@@ -122,14 +132,6 @@ export const dynamicLoad = () =>
           const url = `./${item.component}.tsx`;
           // 判断模块是否真实存在
           if (url in keys) {
-            // * 单模块放置在不同目录下
-            // 如果模块存在, 标记为 false, 再次遇到时则无需加载路由
-            if (keys[url]) {
-              keys[url] = false;
-            } else {
-              addRoute = false;
-            }
-
             // 设置按钮权限
             const { code = "", operate = [] } = item.meta || {};
             if (code && operate.length) {
@@ -140,12 +142,14 @@ export const dynamicLoad = () =>
             const config = Object.assign(item, {
               children: dp(item.children || [], false), // 子路由无需单独添加
               Component: lazy(() => modules(url)),
-              id: `${id++}`,
+              id: id++ + "",
             });
-            // 添加路由
-            if (addRoute) {
+            // 防止重复加载
+            if (!ISREADY.has(url) && SET) {
               routes.unshift(config);
             }
+            // 标记已加载
+            ISREADY.add(url);
             return true;
           }
           return false;

@@ -961,6 +961,7 @@ declare global {
   const useSearchParams: typeof import('react-router-dom')['useSearchParams']
   const useState: typeof import('react')['useState']
   const useSyncExternalStore: typeof import('react')['useSyncExternalStore']
+  const useSystemStore: typeof import('../src/modules/system/store')['useSystemStore']
   const useTheme: typeof import('../src/hooks/plugins')['useTheme']
   const useThemeList: typeof import('../src/hooks/plugins')['useThemeList']
   const useTransition: typeof import('react')['useTransition']

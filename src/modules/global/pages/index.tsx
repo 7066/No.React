@@ -15,18 +15,20 @@ export default function Global() {
       sessionStorage.setItem("PATH", location.pathname);
     }
 
-    if (location.pathname !== "/login") {
+    if (location.pathname === "/login") {
+      _global.ins.clear();
+    } else {
       const TOKEN = localStorage.getItem("TOKEN");
       if (TOKEN) {
         if (!ins.size) {
           NProgress.start();
           const MODE = localStorage.getItem("MODE");
           if (MODE) {
-            _global.mode = MODE as "code" | "url";
+            _global.mode = MODE as "staticMatch" | "dynamicLoad";
           }
 
           let FN;
-          if (_global.mode === "code") {
+          if (_global.mode === "staticMatch") {
             FN = staticMatch;
           } else {
             FN = dynamicLoad;

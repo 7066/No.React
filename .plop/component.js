@@ -15,12 +15,12 @@ module.exports = {
     {
       type: "add",
       path: "src/components/No{{pascalCase code}}/index.tsx",
-      templateFile: "build/plop/templates/component/index.hbs",
+      templateFile: "./.plop/templates/component/index.hbs",
     },
     {
       type: "add",
       path: "src/components/No{{pascalCase code}}/style.scss",
-      templateFile: "build/plop/templates/component/style.hbs",
+      templateFile: "./.plop/templates/component/style.hbs",
     },
   ],
 };
