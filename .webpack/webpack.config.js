@@ -12,27 +12,18 @@ const antd_components = require("../src/constant/antd-components.js");
 module.exports = (env) => {
   return {
     devServer: {
-      // 代理
+      host: "127.0.0.1",
+      port: 3000,
+      open: true,
       proxy: {
-        "/api": {
-          target: "https://www.baidu.com",
+        "^/api": {
+          target: env.NO_REACT_PROXY,
           pathRewrite: { "^/api": "" },
-          secure: false, // https
+          // secure: true, // https
+          changeOrigin: true,
         },
       },
-      // 端口
-      // port: 3000,
-      // 启动  gzip
-      compress: true,
-      // 默认打开浏览器
-      open: false,
-      onListening: (devServer) => {
-        const { port } = devServer.server.address();
-        openBrowser(`http://127.0.0.1:${port}`);
-      },
-      // 热更新
-      hot: true,
-      historyApiFallback: true,
+      // compress: true,
       // 静态目录
       static: [
         {
@@ -40,6 +31,11 @@ module.exports = (env) => {
           publicPath: "/public",
         },
       ],
+      // 默认打开浏览器
+      // onListening: (devServer) => {
+      //   const { port } = devServer.server.address();
+      //   openBrowser(`http://127.0.0.1:${port}`);
+      // },
     },
     // 信息展示
     stats: {
