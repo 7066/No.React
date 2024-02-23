@@ -16,9 +16,9 @@ module.exports = (env) => {
       port: 3000,
       open: true,
       proxy: {
-        "^/api": {
+        "/7066": {
           target: env.NO_REACT_PROXY,
-          pathRewrite: { "^/api": "" },
+          pathRewrite: { "^/7066": "" },
           // secure: true, // https
           changeOrigin: true,
         },
