@@ -16,10 +16,10 @@ module.exports = (env) => {
       port: 3000,
       open: true,
       proxy: {
-        "/7066": {
+        "/nrgtproxy": {
           target: env.NO_REACT_PROXY,
-          pathRewrite: { "^/7066": "" },
-          // secure: true, // https
+          pathRewrite: { "^/nrgtproxy": "" },
+          // secure: false, // https
           changeOrigin: true,
         },
       },

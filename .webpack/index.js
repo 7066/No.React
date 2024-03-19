@@ -2,17 +2,15 @@ const { merge } = require("webpack-merge");
 const config = require("./webpack.config");
 const development = require("./webpack.dev");
 const production = require("./webpack.prod");
-const fs = require("fs");
-const path = require("path");
 const dotenv = require("dotenv");
 
 module.exports = (env) => {
-  let url = ".env";
-  if (env.development) url += ".development";
-  if (env.production) url += ".production";
+  let path = ".env";
+  if (env.development) path += ".development";
+  if (env.production) path += ".production";
 
   dotenv.config({
-    path: fs.existsSync(path.resolve(__dirname, url)),
+    path,
   });
 
   switch (true) {

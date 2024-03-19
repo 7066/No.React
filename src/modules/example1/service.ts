@@ -1,5 +1,5 @@
 export const api_search = () => {
-  return request.get("7066/search/users", {
+  return request.get("nrgtproxy/search/users", {
     params: {
       q: "7066",
     },
@@ -7,7 +7,7 @@ export const api_search = () => {
 };
 
 export const api_search2 = () => {
-  return request.get("7066/search/users2", {
+  return request.get("nrgtproxy/search/users2", {
     params: {
       q: "7066",
     },

@@ -66,7 +66,7 @@ export default function Example2() {
                 金
               </Button>
               <Button
-                type="text"
+                type="link"
                 block
                 onClick={() => onClick("/example2/blue/2")}
               >

@@ -126,6 +126,3 @@ export default [
 ## 代码规范
 
 `husky` `commitlint` `lint-staged` `ESLint` `Prettier` `stylelint`
-
-TODO 添加代理 env 环境变量
-TODO 个人主页 跳转打包
